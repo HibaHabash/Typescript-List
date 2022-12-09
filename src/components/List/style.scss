@@ -1,0 +1,41 @@
+.container {
+    background-color: darkgrey;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-input {
+    width: 400px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #eee;
+    border-width: 3.5px;
+    font-family: Verdana;
+    font-size: 20px;
+    padding: 15px 0px 15px 20px;
+    margin-bottom: 50px;
+    outline: none;
+}
+
+.list-container {
+    display: grid;
+    grid-gap: 2em;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 20px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background: #eee;
+}
+
+.list {
+    width: 400px;
+    height: 400px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: white;
+    border: 3px solid darkgrey;
+    overflow: auto;
+}
