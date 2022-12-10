@@ -1,5 +1,5 @@
 .container {
-    background-color: darkgrey;
+    background-color: #063970;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -18,16 +18,17 @@
     padding: 15px 0px 15px 20px;
     margin-bottom: 50px;
     outline: none;
+    background: #ffffe6;
 }
 
 .list-container {
     display: grid;
     grid-gap: 2em;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr 1fr;
     padding: 20px;
     border: 1px solid #aaa;
     border-radius: 4px;
-    background: #eee;
+    background: #ffffe6;
 }
 
 .list {
@@ -36,6 +37,39 @@
     margin: 10px;
     border-radius: 5px;
     background-color: white;
-    border: 3px solid darkgrey;
-    overflow: auto;
+    border: 3px solid #063970;
+    overflow-y: auto;
+}
+
+.list-item {
+    padding: 10px;
+    cursor: pointer;
+    overflow-x: hidden;
+    text-align: left;
+
+    &:hover {
+        background-color: #e6f7ff;
+    }
+}
+
+.item-name {
+    color: #063970;
+    margin: 5px;
+    font-family: Verdana;
+    font-size: 15px;
+    word-wrap: break-word;
+}
+
+.button {
+    font-family: Verdana;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    background-color: #5c85d6;
+    float: right;
+
+    &:hover {
+        background-color: #ffffb3;
+    }
 }
