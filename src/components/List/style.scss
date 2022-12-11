@@ -1,6 +1,5 @@
 .container {
     background-color: #063970;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,7 +15,7 @@
     font-family: Verdana;
     font-size: 20px;
     padding: 15px 0px 15px 20px;
-    margin-bottom: 50px;
+    margin: 50px;
     outline: none;
     background: #ffffe6;
 }
@@ -26,6 +25,7 @@
     grid-gap: 2em;
     grid-template-columns: 1fr 1fr;
     padding: 20px;
+    margin: 25px;
     border: 1px solid #aaa;
     border-radius: 4px;
     background: #ffffe6;
