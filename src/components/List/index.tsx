@@ -7,6 +7,7 @@ export default function List() {
         movies: [''],
         watchingList: ['Emily'],
         filteredResults: [''],
+        filteredWatching: [''],
         searchInput: '',
     });
     const fetchData = () => {
@@ -46,11 +47,42 @@ export default function List() {
         }));
     };
 
+    const addHtml = (element: string, index: number) => {
+        return (
+            <div className="list-item" key={index}>
+                <p className="item-name">{element}</p>
+                <button className="button" onClick={() => addFunction(index)}>
+                    Add
+                </button>
+            </div>
+        );
+    };
+
+    const removeHtml = (element: string, index: number) => {
+        return (
+            <div className="list-item" key={index}>
+                <p className="item-name">{element}</p>
+                <button
+                    className="button"
+                    onClick={() => removeFunction(index)}
+                >
+                    Remove
+                </button>
+            </div>
+        );
+    };
+
     const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.value !== '') {
             setState(() => ({
                 ...state,
                 searchInput: e.target.value,
+                filteredWatching: state.watchingList.filter(
+                    (watchingList) =>
+                        watchingList
+                            .toLowerCase()
+                            .indexOf(e.target.value.toLowerCase()) >= 0
+                ),
                 filteredResults: state.movies.filter(
                     (movies) =>
                         movies
@@ -61,6 +93,7 @@ export default function List() {
         } else {
             setState(() => ({
                 ...state,
+                filteredWatching: state.watchingList,
                 filteredResults: state.movies,
             }));
         }
@@ -78,41 +111,21 @@ export default function List() {
                 <p className="item-name">Watching List</p>
                 <div className="list">
                     {state.searchInput.length > 0
-                        ? state.filteredResults.map((element, index) => (
-                              <div className="list-item" key={index}>
-                                  <p className="item-name">{element}</p>
-                                  <button
-                                      className="button"
-                                      onClick={() => addFunction(index)}
-                                  >
-                                      Add
-                                  </button>
-                              </div>
-                          ))
-                        : state.movies.map((element, index) => (
-                              <div className="list-item" key={index}>
-                                  <p className="item-name">{element}</p>
-                                  <button
-                                      className="button"
-                                      onClick={() => addFunction(index)}
-                                  >
-                                      Add
-                                  </button>
-                              </div>
-                          ))}
+                        ? state.filteredResults.map((element, index) =>
+                              addHtml(element, index)
+                          )
+                        : state.movies.map((element, index) =>
+                              addHtml(element, index)
+                          )}
                 </div>
                 <div className="list">
-                    {state.watchingList.map((element, index) => (
-                        <div className="list-item" key={index}>
-                            <p className="item-name">{element}</p>
-                            <button
-                                className="button"
-                                onClick={() => removeFunction(index)}
-                            >
-                                Remove
-                            </button>
-                        </div>
-                    ))}
+                    {state.searchInput.length > 0
+                        ? state.filteredWatching.map((element, index) =>
+                              removeHtml(element, index)
+                          )
+                        : state.watchingList.map((element, index) =>
+                              removeHtml(element, index)
+                          )}
                 </div>
             </div>
         </div>
