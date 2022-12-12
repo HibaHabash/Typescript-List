@@ -1,0 +1,55 @@
+.list {
+    width: 400px;
+    height: 400px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: white;
+    border: 3px solid #063970;
+    overflow-y: auto;
+}
+
+.list-item {
+    padding: 10px;
+    cursor: pointer;
+    overflow-x: hidden;
+    text-align: left;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+    &:hover {
+        background-color: #e6f7ff;
+    }
+}
+
+.item-name {
+    color: #063970;
+    margin: 5px;
+    font-family: Verdana;
+    font-size: 20px;
+    word-wrap: break-word;
+}
+
+.item-desc {
+    font-family: Verdana;
+    font-size: 12px;
+}
+
+.button {
+    font-family: Verdana;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    background-color: #5c85d6;
+    float: right;
+
+    &:hover {
+        background-color: #ffffb3;
+    }
+}
+
+.poster {
+    width: 100px;
+    height: auto;
+    grid-row-start: span 2;
+}
