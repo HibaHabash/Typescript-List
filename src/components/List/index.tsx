@@ -8,14 +8,6 @@ export type movie = {
    movieId: number[];
    moviePoster: string[];
    movieOverview: string[];
-   searchInput: string;
-};
-
-export type watching = {
-   movies: string[];
-   movieId: number[];
-   moviePoster: string[];
-   movieOverview: string[];
 };
 
 export default function List() {
@@ -24,14 +16,15 @@ export default function List() {
       movieId: [],
       moviePoster: [''],
       movieOverview: [''],
-      searchInput: '',
    });
-   const [watchingState, setWatchingState] = useState<watching>({
+   const [watchingState, setWatchingState] = useState<movie>({
       movies: [''],
       movieId: [],
       moviePoster: [''],
       movieOverview: [''],
    });
+
+   const [searchInput, setSearchInput] = useState('');
 
    const fetchData = () => {
       return axios
@@ -135,35 +128,30 @@ export default function List() {
       }));
    };
 
-   //    const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-   //       if (e.target.value !== '') {
-   //          setState(() => ({
-   //             ...state,
-   //             searchInput: e.target.value,
-   //             filteredWatching: state.movies.filter(
-   //                (movies) =>
-   //                   movies.toLowerCase().indexOf(e.target.value.toLowerCase()) >=
-   //                   0
-   //             ),
-   //             filteredResults: state.movies.filter(
-   //                (movies) =>
-   //                   movies.toLowerCase().indexOf(e.target.value.toLowerCase()) >=
-   //                   0
-   //             ),
-   //          }));
-   //       } else {
-   //          setState(() => ({
-   //             ...state,
-   //          }));
-   //       }
-   //    };
+   const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchInput(e.target.value);
+      if (searchInput !== '') {
+         setState(() => ({
+            ...state,
+            movies: state.movies.filter(
+               (movies) =>
+                  movies.toLowerCase().indexOf(e.target.value.toLowerCase()) >=
+                  0
+            ),
+         }));
+      } else {
+         setState(() => ({
+            ...state,
+         }));
+      }
+   };
 
    return (
       <div className="container">
          <input
             className="search-input"
             placeholder="type here ..."
-            //onChange={onSearch}
+            onChange={onSearch}
          />
          <div className="list-container">
             <p className="item-name">Movies</p>

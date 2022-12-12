@@ -1,10 +1,10 @@
 import React from 'react';
 import './style.scss';
-import { movie, watching } from '../List';
+import { movie } from '../List';
 
 export default function ListBox(props: {
    addRemove: (id: number) => void;
-   state: movie | watching;
+   state: movie;
 }) {
    return (
       <>
