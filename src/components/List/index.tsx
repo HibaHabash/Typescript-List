@@ -35,43 +35,31 @@ export default function List() {
    }, []);
 
    const addFunction = (id: number) => {
-      watchingList.splice(
-         0,
-         0,
-         movieList[
-            movieList.findIndex(function (index) {
-               return index.id === id;
-            })
-         ]
-      );
-
-      movieList.splice(
-         movieList.findIndex(function (index) {
-            return index.id === id;
-         }),
-         1
-      );
-      setState({ ...state });
+      setState({
+         ...state,
+         watchingList: watchingList.concat(
+            movieList.splice(
+               movieList.findIndex(function (index) {
+                  return index.id === id;
+               }),
+               1
+            )
+         ),
+      });
    };
 
    const removeFunction = (id: number) => {
-      movieList.splice(
-         0,
-         0,
-         watchingList[
-            watchingList.findIndex(function (index) {
-               return index.id === id;
-            })
-         ]
-      );
-
-      watchingList.splice(
-         watchingList.findIndex(function (index) {
-            return index.id === id;
-         }),
-         1
-      );
-      setState({ ...state });
+      setState({
+         ...state,
+         movieList: movieList.concat(
+            watchingList.splice(
+               watchingList.findIndex(function (index) {
+                  return index.id === id;
+               }),
+               1
+            )
+         ),
+      });
    };
 
    const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
