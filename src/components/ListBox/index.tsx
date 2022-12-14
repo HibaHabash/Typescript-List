@@ -1,36 +1,51 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
-import { movie } from '../List';
+import { Movie } from '../List';
 
-export default function ListBox(props: {
-   addRemove: (id: number) => void;
-   state: movie;
-}) {
-   return (
-      <>
-         <div className="list">
-            {props.state.movies.map((element, index) => (
-               <div className="list-item" key={index}>
-                  <img
-                     src={props.state.moviePoster[index]}
-                     className="poster"
-                  />
-                  <div>
-                     <label className="item-name">{element}</label>
-                     <br />
-                     <label className="item-desc">
-                        {props.state.movieOverview[index]}
-                     </label>
-                  </div>
-                  <button
-                     className="button"
-                     onClick={() => props.addRemove(props.state.movieId[index])}
-                  >
-                     Add
-                  </button>
-               </div>
-            ))}
-         </div>
-      </>
-   );
+interface Props {
+   onClick: (id: number) => void;
+   list: Movie[];
+   searchValue: string;
 }
+const ListBox = ({ list, searchValue, onClick }: Props) => {
+   const [localList, setLocalList] = useState<Movie[]>(list);
+
+   useEffect(() => {
+      if (searchValue !== '') {
+         setLocalList(
+            list.filter(
+               (element) =>
+                  element.title
+                     .toLowerCase()
+                     .indexOf(searchValue.toLowerCase()) >= 0
+            )
+         );
+      } else {
+         setLocalList(list);
+      }
+   }, [searchValue]);
+
+   useEffect(() => {
+      setLocalList(list);
+   }, [list]);
+
+   return (
+      <div className="list">
+         {localList.map((element) => (
+            <div className="list-item" key={element.id}>
+               <img src={element.poster} className="poster" />
+               <div>
+                  <label className="item-name">{element.title}</label>
+                  <br />
+                  <label className="item-desc">{element.overview}</label>
+               </div>
+               <button className="button" onClick={() => onClick(element.id)}>
+                  Add
+               </button>
+            </div>
+         ))}
+      </div>
+   );
+};
+
+export default ListBox;
