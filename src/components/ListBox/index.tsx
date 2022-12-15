@@ -6,8 +6,9 @@ interface Props {
    onClick: (id: number) => void;
    list: Movie[];
    searchValue: string;
+   loadMore: number;
 }
-const ListBox = ({ list, searchValue, onClick }: Props) => {
+const ListBox = ({ list, searchValue, onClick, loadMore }: Props) => {
    const [localList, setLocalList] = useState<Movie[]>(list);
 
    useEffect(() => {
@@ -31,7 +32,7 @@ const ListBox = ({ list, searchValue, onClick }: Props) => {
 
    return (
       <div className="list">
-         {localList.map((element) => (
+         {localList.slice(0, loadMore).map((element) => (
             <div className="list-item" key={element.id}>
                <img src={element.poster} className="poster" />
                <div>

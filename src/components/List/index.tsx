@@ -16,13 +16,15 @@ export default function List() {
       movieList: Movie[];
       watchingList: Movie[];
       searchValue: string;
+      loadMore: number;
    }>({
       movieList: [],
       watchingList: [],
       searchValue: '',
+      loadMore: 10,
    });
 
-   const { movieList, watchingList, searchValue } = state;
+   const { movieList, watchingList, searchValue, loadMore } = state;
 
    const fetchData = async () => {
       const data = await axios.get(
@@ -65,6 +67,16 @@ export default function List() {
    const onSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
       setState({ ...state, searchValue: e.target.value });
    };
+   const LoadMoreFunction = (e: React.MouseEvent<HTMLElement>) => {
+      if (loadMore + 10 >= movieList.length) {
+         (e.target as HTMLInputElement).disabled = true;
+      } else {
+         setState({
+            ...state,
+            loadMore: loadMore + 10,
+         });
+      }
+   };
 
    return (
       <div className="container">
@@ -80,12 +92,17 @@ export default function List() {
                onClick={addFunction}
                list={movieList}
                searchValue={searchValue}
+               loadMore={loadMore}
             />
             <ListBox
                onClick={removeFunction}
                list={watchingList}
                searchValue={searchValue}
+               loadMore={loadMore}
             />
+            <button className="button" onClick={LoadMoreFunction}>
+               Load More
+            </button>
          </div>
       </div>
    );
