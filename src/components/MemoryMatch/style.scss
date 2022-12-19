@@ -1,0 +1,28 @@
+.container {
+   margin: auto;
+   width: 60%;
+}
+.cards-container {
+   border: 5px solid #dedede;
+   width: 800px;
+   padding: 10px;
+   margin: 10px;
+   display: grid;
+   grid-template-columns: repeat(6, 0.1fr);
+   grid-template-rows: repeat(6, 0.1fr);
+   gap: 10px;
+   justify-content: center;
+}
+
+.card {
+   height: 90px;
+   width: 120px;
+   background-color: darkgrey;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.item {
+   font-size: xx-large;
+}
