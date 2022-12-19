@@ -23,6 +23,10 @@ const MemoryMatch = () => {
       setState({ ...state, dataArray: shuffledArray });
    };
 
+   useEffect(() => {
+      createCardBoard();
+   }, []);
+
    const shuffleArray = (array: number[]) => {
       for (let i = array.length - 1; i > 0; i--) {
          const j = Math.floor(Math.random() * (i + 1));
@@ -36,6 +40,11 @@ const MemoryMatch = () => {
    };
 
    const flipCard = (item: number, index: number) => {
+      if (openCards.length === dataArray.length) {
+         alert('Good Job');
+         window.location.reload();
+      }
+
       if (cardsChosenIndex.length === 1 && cardsChosenIndex[0] === index) {
          return;
       }
@@ -65,16 +74,12 @@ const MemoryMatch = () => {
 
    const resetGame = () => {
       setState({
-         dataArray: [],
+         ...state,
          cardsChosen: [],
          cardsChosenIndex: [],
          openCards: [],
       });
    };
-
-   useEffect(() => {
-      createCardBoard();
-   }, []);
 
    return (
       <div className="container">
